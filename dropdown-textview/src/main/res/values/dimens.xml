@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="arrow_default_size">25dp</dimen>
+    <dimen name="panel_default_padding">12dp</dimen>
+    <dimen name="content_default_padding">12dp</dimen>
+</resources>

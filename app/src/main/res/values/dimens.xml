@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="drop_down_text_view_panel_padding">22dp</dimen>
+    <dimen name="drop_down_text_view_content_padding">22dp</dimen>
+    <dimen name="margin_10">10dp</dimen>
+</resources>

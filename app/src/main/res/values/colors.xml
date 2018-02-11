@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="first_drop_down_text_view_title">#FFDFF5FF</color>
+    <color name="first_drop_down_text_view_content">#323b40</color>
+
+    <color name="second_drop_down_text_view_title">#FFDFF5FF</color>
+    <color name="second_drop_down_text_view_content">#FF212C34</color>
+
+    <color name="third_drop_down_text_view_title">#34495e</color>
+    <color name="third_drop_down_text_view_content">#2c3e50</color>
+</resources>

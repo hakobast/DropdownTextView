@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/root_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <hakobastvatsatryan.dropdowntextview.DropdownTextView
+            android:id="@+id/first_dropdown_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:bg_drawable_expanded="@drawable/bg_first_dropdown_text_view_expanded"
+            app:bg_drawable_regular="@drawable/bg_first_dropdown_text_view_regular"
+            app:content_padding="@dimen/drop_down_text_view_content_padding"
+            app:content_text_color="@color/first_drop_down_text_view_content"
+            app:panel_padding="@dimen/drop_down_text_view_panel_padding"
+            app:title_text_color="@color/first_drop_down_text_view_title"
+            app:title_text="@string/dropdown_title_text"
+            app:content_text="@string/dropdown_content_text"/>
+
+        <hakobastvatsatryan.dropdowntextview.DropdownTextView
+            android:id="@+id/second_dropdown_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:bg_drawable_expanded="@drawable/bg_second_dropdown_text_view_expanded"
+            app:bg_drawable_regular="@drawable/bg_second_dropdown_text_view_regular"
+            app:content_text_color="@color/second_drop_down_text_view_content"
+            app:title_text_color="@color/second_drop_down_text_view_title"/>
+    </LinearLayout>
+</ScrollView>
