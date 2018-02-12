@@ -64,12 +64,12 @@ val dropdown = DropdownTextView.Builder(this)
   root.addView(dropdown) // You can specify layout params for dropdown
 ```
 
-## Gradle
-
+## Download
+Gradle:
 ```groovy
 compile 'com.github.haksist:dropdown-textview:0.1.0'
 ```
-## Maven:
+Maven:
 ```xml
 <dependency>
   <groupId>com.github.haksist</groupId>
