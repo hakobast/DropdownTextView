@@ -69,7 +69,7 @@ val dropdown = DropdownTextView.Builder(this)
 ```groovy
 compile 'com.github.haksist:dropdown-textview:0.1.0'
 ```
-Maven:
+## Maven:
 ```xml
 <dependency>
   <groupId>com.github.haksist</groupId>
