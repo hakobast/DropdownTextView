@@ -11,8 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
-        android:focusable="true"
-        android:padding="@dimen/panel_default_padding">
+        android:focusable="true">
 
         <TextView
             android:id="@+id/title_text_view"
@@ -37,7 +36,6 @@
         android:id="@+id/content_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|start"
-        android:padding="@dimen/content_default_padding"/>
+        android:layout_gravity="center_vertical|start"/>
 
 </LinearLayout>

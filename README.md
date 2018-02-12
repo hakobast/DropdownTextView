@@ -79,6 +79,11 @@ Maven:
 </dependency>
 ```
 
+## Contact
+
+- **Email**: hakob.astvacatryan@gmail.com
+- **Twitter**: https://twitter.com/hak_ast
+
 ## License
 
  Copyright 2018 Hakob Astvatsatryan
