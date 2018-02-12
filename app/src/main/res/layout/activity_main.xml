@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <hakobastvatsatryan.dropdowntextview.DropdownTextView
+        <hakobastvatsatryan.DropdownTextView
             android:id="@+id/first_dropdown_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -25,7 +25,7 @@
             app:title_text="@string/dropdown_title_text"
             app:content_text="@string/dropdown_content_text"/>
 
-        <hakobastvatsatryan.dropdowntextview.DropdownTextView
+        <hakobastvatsatryan.DropdownTextView
             android:id="@+id/second_dropdown_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

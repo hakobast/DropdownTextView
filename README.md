@@ -19,7 +19,7 @@ Adds drop-down to your layout via XML
     android:orientation="vertical">
 
 
-    <hakobastvatsatryan.dropdowntextview.DropdownTextView
+    <hakobastvatsatryan.DropdownTextView
         android:id="@+id/first_dropdown_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -67,12 +67,12 @@ val dropdown = DropdownTextView.Builder(this)
 ## Download
 Gradle:
 ```groovy
-compile 'com.github.haksist:dropdown-textview:0.1.0'
+compile 'com.github.hakobast:dropdown-textview:0.1.0'
 ```
 Maven:
 ```xml
 <dependency>
-  <groupId>com.github.haksist</groupId>
+  <groupId>com.github.hakobast</groupId>
   <artifactId>dropdown-textview</artifactId>
   <version>0.1.0</version>
   <type>pom</type>

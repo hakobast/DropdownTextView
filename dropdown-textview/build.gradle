@@ -5,18 +5,18 @@ ext {
     bintrayRepo = 'maven'
     bintrayName = 'dropdown-textview'
 
-    publishedGroupId = 'com.github.haksist'
+    publishedGroupId = 'com.github.hakobast'
     libraryName = 'DropdownTextView'
     artifact = 'dropdown-textview'
 
     libraryDescription = 'Simple drop-down TextView for Android'
 
-    siteUrl = 'https://github.com/haksist/DropdownTextView'
-    gitUrl = 'https://github.com/haksist/DropdownTextView.git'
+    siteUrl = 'https://github.com/hakobast/DropdownTextView'
+    gitUrl = 'https://github.com/hakobast/DropdownTextView.git'
 
     libraryVersion = '0.1.0'
 
-    developerId = 'hakobastvatsatryan'
+    developerId = 'hakobast'
     developerName = 'Hakob Astvatsatryan'
     developerEmail = 'hakob.astvacatryan@gmail.com'
 

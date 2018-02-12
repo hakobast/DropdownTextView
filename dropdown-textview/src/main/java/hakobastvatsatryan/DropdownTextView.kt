@@ -1,4 +1,4 @@
-package hakobastvatsatryan.dropdowntextview
+package hakobastvatsatryan
 
 import android.content.Context
 import android.support.v4.content.ContextCompat
@@ -12,6 +12,7 @@ import android.widget.TextView
 import android.os.Bundle
 import android.os.Parcelable
 import android.support.annotation.*
+import hakobastvatsatryan.dropdowntextview.R
 
 
 /**
@@ -96,14 +97,14 @@ class DropdownTextView : LinearLayout {
 		contentTextView.setText(stringRes)
 	}
 
-	public override fun onSaveInstanceState(): Parcelable? {
+	override fun onSaveInstanceState(): Parcelable? {
 		val bundle = Bundle()
 		bundle.putParcelable("superState", super.onSaveInstanceState())
 		bundle.putBoolean("expanded", this.isExpanded)
 		return bundle
 	}
 
-	public override fun onRestoreInstanceState(state: Parcelable?) {
+	override fun onRestoreInstanceState(state: Parcelable?) {
 		var superState: Parcelable? = null
 		if (state is Bundle) {
 			isExpanded = state.getBoolean("expanded")
@@ -249,7 +250,8 @@ class DropdownTextView : LinearLayout {
 	}
 
 	private fun inflateView() {
-		View.inflate(context, R.layout.view_dropdown_text_view, this)
+		View.inflate(context,
+				R.layout.view_dropdown_text_view, this)
 	}
 
 	private fun expandInternal(animate: Boolean) {

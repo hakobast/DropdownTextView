@@ -1,4 +1,4 @@
-package hakobastvatsatryan.dropdowntextview
+package hakobastvatsatryan
 
 import android.animation.Animator
 import android.animation.PropertyValuesHolder
