@@ -1,6 +1,30 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'dropdown-textview'
+
+    publishedGroupId = 'com.github.haksist'
+    libraryName = 'DropdownTextView'
+    artifact = 'dropdown-textview'
+
+    libraryDescription = 'Simple drop-down TextView for Android'
+
+    siteUrl = 'https://github.com/haksist/DropdownTextView'
+    gitUrl = 'https://github.com/haksist/DropdownTextView.git'
+
+    libraryVersion = '0.1.0'
+
+    developerId = 'hakobastvatsatryan'
+    developerName = 'Hakob Astvatsatryan'
+    developerEmail = 'hakob.astvacatryan@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
 android {
     compileSdkVersion 27
 
@@ -11,7 +35,6 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
 
     buildTypes {
@@ -30,5 +53,12 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
+
+tasks.withType(Javadoc).all {
+    enabled = false
 }

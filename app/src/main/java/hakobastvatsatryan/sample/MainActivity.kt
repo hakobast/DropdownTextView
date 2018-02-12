@@ -14,19 +14,17 @@ class MainActivity : AppCompatActivity() {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_main)
 
-		val firstDropdownTextView: DropdownTextView = findViewById(R.id.first_dropdown_text_view)
-
 		val secondDropdownTextView: DropdownTextView = findViewById(R.id.second_dropdown_text_view)
 		secondDropdownTextView.setTitleText(R.string.dropdown_title_text)
 		secondDropdownTextView.setContentText(R.string.dropdown_content_text)
 
 		val thirdDropdownTextViewSecond = DropdownTextView.Builder(this)
 				.setTitleTextColorRes(R.color.third_drop_down_text_view_title)
+				.setTitleTextRes(R.string.dropdown_title_text)
 				.setContentTextColorRes(R.color.third_drop_down_text_view_content)
+				.setContentTextRes(R.string.dropdown_content_text)
 				.setRegularBackgroundDrawableRes(R.drawable.bg_third_dropdown_text_view_regular)
 				.setExpandedBackgroundDrawableRes(R.drawable.bg_third_dropdown_text_view_expanded)
-				.setTitleTextRes(R.string.dropdown_title_text)
-				.setContentTextRes(R.string.dropdown_content_text)
 				.build()
 
 		val root: ViewGroup = findViewById(R.id.root_view)
