@@ -32,7 +32,7 @@ Adds drop-down to your layout via XML
         app:content_text="@string/your-content-text"
         app:content_text_color="@color/your-content-text-color"
         app:content_text_size="@color/your-content-text-size"
-        app:arrow_drawable="@drawable/your-arrow-icon"
+        app:arrow_drawable="@drawable/your-arrow-icon" comment="icon should be faced to the right"
         app:bg_drawable_regular="@drawable/your-regular-background"
         app:bg_drawable_expanded="@drawable/your-expanded-background"
         app:expand_duration="@integer/your-expand-duration"
@@ -54,7 +54,7 @@ val dropdown = DropdownTextView.Builder(this)
   .setContentTextSizeRes(R.color.your_content_text_size)
   .setContentFontRes(R.color.your_content_text_font)
   .setContentPaddingRes(R.dimen.your_content_padding)
-  .setArrowDrawableRes(R.drawable.your_drawable_icon)
+  .setArrowDrawableRes(R.drawable.your_drawable_icon) // icon should be faced to the right
   .setRegularBackgroundDrawableRes(R.drawable.your_regular_background)
   .setExpandedBackgroundDrawableRes(R.drawable.your_expanded_background)
   .setPanelPaddingRes(R.dimen.your_panel_padding)
