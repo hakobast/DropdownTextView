@@ -209,7 +209,7 @@ class DropdownTextView : LinearLayout {
 
 	private fun setResources() {
 		arrowView.setBackgroundResource(arrowDrawableRes)
-		if(titleTextRes != -1){
+		if (titleTextRes != -1) {
 			titleTextView.setText(titleTextRes)
 		}
 		if (titleTextColorRes != -1) {
@@ -225,7 +225,7 @@ class DropdownTextView : LinearLayout {
 			titleTextView.typeface = ResourcesCompat.getFont(context, titleFontRes)
 		}
 
-		if(contentTextRes != -1){
+		if (contentTextRes != -1) {
 			contentTextView.setText(contentTextRes)
 		}
 		if (contentTextColorRes != -1) {
@@ -250,8 +250,7 @@ class DropdownTextView : LinearLayout {
 	}
 
 	private fun inflateView() {
-		View.inflate(context,
-				R.layout.view_dropdown_text_view, this)
+		View.inflate(context, R.layout.view_dropdown_text_view, this)
 	}
 
 	private fun expandInternal(animate: Boolean) {
@@ -277,16 +276,16 @@ class DropdownTextView : LinearLayout {
 	}
 
 	private fun setArrowViewState(expand: Boolean, animate: Boolean) {
-		arrowView.startAnimation(AnimationUtils.loadAnimation(
-				context,
-				if (expand)
-					R.anim.drop_down_arrow_rotation_expand
-				else
-					R.anim.drop_down_arrow_rotation_collaps
-		).apply {
-			fillAfter = true
-			duration = (if (animate) expandDuration else 0).toLong()
-		})
+		var angle = if (resources.configuration.layoutDirection == View.LAYOUT_DIRECTION_RTL) {
+			if (expand) 90.0f else 180.0f
+		}else{
+			if (expand) 90.0f else 0.0f
+		}
+
+		arrowView.animate()
+				.rotation(angle)
+				.setDuration((if (animate) expandDuration else 0).toLong())
+				.start()
 	}
 
 	private fun setHeightToZero(animate: Boolean) {

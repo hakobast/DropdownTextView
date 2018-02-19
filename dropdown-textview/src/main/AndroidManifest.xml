@@ -1,2 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="hakobastvatsatryan.dropdowntextview"/>
+          package="hakobastvatsatryan.dropdowntextview">
+
+    <application android:supportsRtl="true"/>
+
+</manifest>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -21,7 +21,9 @@
             android:layout_centerVertical="true"
             android:layout_toStartOf="@id/arrow_view"
             android:maxLines="1"
+            android:textAlignment="viewStart"
             tools:text="@tools:sample/lorem/random"/>
+
         <View
             android:id="@+id/arrow_view"
             android:layout_width="@dimen/arrow_default_size"
