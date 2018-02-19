@@ -276,7 +276,7 @@ class DropdownTextView : LinearLayout {
 	}
 
 	private fun setArrowViewState(expand: Boolean, animate: Boolean) {
-		var angle = if (resources.configuration.layoutDirection == View.LAYOUT_DIRECTION_RTL) {
+		val angle = if (resources.configuration.layoutDirection == View.LAYOUT_DIRECTION_RTL) {
 			if (expand) 90.0f else 180.0f
 		}else{
 			if (expand) 90.0f else 0.0f
