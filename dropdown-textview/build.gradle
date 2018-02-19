@@ -14,7 +14,7 @@ ext {
     siteUrl = 'https://github.com/hakobast/DropdownTextView'
     gitUrl = 'https://github.com/hakobast/DropdownTextView.git'
 
-    libraryVersion = '0.1.0'
+    libraryVersion = '0.1.1'
 
     developerId = 'hakobast'
     developerName = 'Hakob Astvatsatryan'
