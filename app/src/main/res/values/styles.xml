@@ -1,11 +1,22 @@
 <resources>
 
+    <attr name="color_1" format="color"/>
+
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="color_1">#f97a12</item>
+    </style>
+
+    <style name="SupportDropdownTextView">
+        <item name="arrow_drawable">@drawable/ic_arrow</item>
+        <item name="bg_drawable_expanded">@drawable/bg_second_dropdown_text_view_expanded</item>
+        <item name="bg_drawable_regular">@drawable/bg_first_dropdown_text_view_regular</item>
+        <item name="content_text_color">?attr/color_1</item>
+        <item name="title_text_color">#ff00ff</item>
     </style>
 
 </resources>

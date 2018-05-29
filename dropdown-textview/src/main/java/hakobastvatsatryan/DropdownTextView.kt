@@ -6,7 +6,6 @@ import android.support.v4.content.res.ResourcesCompat
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
-import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.os.Bundle
@@ -27,13 +26,13 @@ class DropdownTextView : LinearLayout {
 	private lateinit var arrowView: View
 
 	private var isExpanded: Boolean = false
-	private var titleTextRes: Int = -1
-	private var contentTextRes: Int = -1
+	private var titleText: String? = null
+	private var contentText: String? = null
 	private var expandDuration: Int = -1
-	private var titleTextColorRes: Int = -1
+	private var titleTextColor: Int? = null
 	private var titleTextSizeRes: Int = -1
 	private var titleFontRes: Int = -1
-	private var contentTextColorRes: Int = -1
+	private var contentTextColor: Int? = null
 	private var contentTextSizeRes: Int = -1
 	private var contentFontRes: Int = -1
 	private var arrowDrawableRes: Int = -1
@@ -115,13 +114,13 @@ class DropdownTextView : LinearLayout {
 	}
 
 	private fun readBuilder(builder: Builder) {
-		titleTextRes = builder.titleTextRes
-		titleTextColorRes = builder.titleTextColorRes
+		titleText = resources.getString(builder.titleTextRes)
+		titleTextColor = ContextCompat.getColor(context, builder.titleTextColorRes)
 		titleTextSizeRes = builder.titleTextSizeRes
 		titleFontRes = builder.titleFontRes
 
-		contentTextRes = builder.contentTextRes
-		contentTextColorRes = builder.contentTextColorRes
+		contentText = resources.getString(builder.contentTextRes)
+		contentTextColor = ContextCompat.getColor(context, builder.contentTextColorRes)
 		contentTextSizeRes = builder.contentTextSizeRes
 		contentFontRes = builder.contentFontRes
 
@@ -143,13 +142,37 @@ class DropdownTextView : LinearLayout {
 				0, 0
 		)
 
-		titleTextRes = a.getResourceId(R.styleable.DropdownTextView_title_text, -1)
-		titleTextColorRes = a.getResourceId(R.styleable.DropdownTextView_title_text_color, -1)
+		val typeValue = TypedValue()
+
+		a.getValue(R.styleable.DropdownTextView_title_text, typeValue)
+		titleText = when(typeValue.type){
+			TypedValue.TYPE_STRING -> typeValue.string as String?
+			TypedValue.TYPE_REFERENCE -> resources.getString(typeValue.resourceId)
+			else -> null
+		}
+
+		a.getValue(R.styleable.DropdownTextView_title_text_color, typeValue)
+		titleTextColor = when(typeValue.type){
+			TypedValue.TYPE_REFERENCE -> ContextCompat.getColor(context, typeValue.resourceId)
+			else -> typeValue.data
+		}
+
 		titleTextSizeRes = a.getResourceId(R.styleable.DropdownTextView_title_text_size, -1)
 		titleFontRes = a.getResourceId(R.styleable.DropdownTextView_title_font, -1)
 
-		contentTextRes = a.getResourceId(R.styleable.DropdownTextView_content_text, -1)
-		contentTextColorRes = a.getResourceId(R.styleable.DropdownTextView_content_text_color, -1)
+		a.getValue(R.styleable.DropdownTextView_content_text, typeValue)
+		contentText = when(typeValue.type){
+			TypedValue.TYPE_STRING -> typeValue.string as String?
+			TypedValue.TYPE_REFERENCE -> resources.getString(typeValue.resourceId)
+			else -> null
+		}
+
+		a.getValue(R.styleable.DropdownTextView_content_text_color, typeValue)
+		contentTextColor = when(typeValue.type){
+			TypedValue.TYPE_REFERENCE -> ContextCompat.getColor(context, typeValue.resourceId)
+			else -> typeValue.data
+		}
+
 		contentTextSizeRes = a.getResourceId(R.styleable.DropdownTextView_content_text_size, -1)
 		contentFontRes = a.getResourceId(R.styleable.DropdownTextView_content_font, -1)
 
@@ -209,12 +232,10 @@ class DropdownTextView : LinearLayout {
 
 	private fun setResources() {
 		arrowView.setBackgroundResource(arrowDrawableRes)
-		if (titleTextRes != -1) {
-			titleTextView.setText(titleTextRes)
-		}
-		if (titleTextColorRes != -1) {
-			titleTextView.setTextColor(ContextCompat.getColor(context, titleTextColorRes))
-		}
+		titleTextView.text = titleText
+		contentTextView.text = contentText
+
+		titleTextColor?.let { titleTextView.setTextColor(it) }
 		if (titleTextSizeRes != -1) {
 			titleTextView.setTextSize(
 					TypedValue.COMPLEX_UNIT_PX,
@@ -225,12 +246,7 @@ class DropdownTextView : LinearLayout {
 			titleTextView.typeface = ResourcesCompat.getFont(context, titleFontRes)
 		}
 
-		if (contentTextRes != -1) {
-			contentTextView.setText(contentTextRes)
-		}
-		if (contentTextColorRes != -1) {
-			contentTextView.setTextColor(ContextCompat.getColor(context, contentTextColorRes))
-		}
+		contentTextColor?.let { contentTextView.setTextColor(it) }
 		if (contentTextSizeRes != -1) {
 			contentTextView.setTextSize(
 					TypedValue.COMPLEX_UNIT_PX,
