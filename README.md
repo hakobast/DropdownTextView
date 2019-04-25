@@ -76,7 +76,7 @@ Maven:
 <dependency>
   <groupId>com.github.hakobast</groupId>
   <artifactId>dropdown-textview</artifactId>
-  <version>0.2</version>
+  <version>0.2.1</version>
   <type>pom</type>
 </dependency>
 ```
