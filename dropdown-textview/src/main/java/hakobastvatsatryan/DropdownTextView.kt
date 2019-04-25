@@ -1,8 +1,8 @@
 package hakobastvatsatryan
 
 import android.content.Context
-import android.support.v4.content.ContextCompat
-import android.support.v4.content.res.ResourcesCompat
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
@@ -10,7 +10,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.os.Bundle
 import android.os.Parcelable
-import android.support.annotation.*
+import androidx.annotation.*
 import hakobastvatsatryan.dropdowntextview.R
 
 
@@ -30,6 +30,7 @@ class DropdownTextView : LinearLayout {
 	private var contentText: String? = null
 	private var expandDuration: Int = -1
 	private var titleTextColor: Int? = null
+	private var titleTextColorExpanded: Int? = null
 	private var titleTextSizeRes: Int = -1
 	private var titleFontRes: Int = -1
 	private var contentTextColor: Int? = null
@@ -116,6 +117,7 @@ class DropdownTextView : LinearLayout {
 	private fun readBuilder(builder: Builder) {
 		titleText = resources.getString(builder.titleTextRes)
 		titleTextColor = ContextCompat.getColor(context, builder.titleTextColorRes)
+		titleTextColorExpanded = ContextCompat.getColor(context, builder.titleTextColorExpandedRes)
 		titleTextSizeRes = builder.titleTextSizeRes
 		titleFontRes = builder.titleFontRes
 
@@ -145,14 +147,20 @@ class DropdownTextView : LinearLayout {
 		val typeValue = TypedValue()
 
 		a.getValue(R.styleable.DropdownTextView_title_text, typeValue)
-		titleText = when(typeValue.type){
+		titleText = when (typeValue.type) {
 			TypedValue.TYPE_STRING -> typeValue.string as String?
 			TypedValue.TYPE_REFERENCE -> resources.getString(typeValue.resourceId)
 			else -> null
 		}
 
 		a.getValue(R.styleable.DropdownTextView_title_text_color, typeValue)
-		titleTextColor = when(typeValue.type){
+		titleTextColor = when (typeValue.type) {
+			TypedValue.TYPE_REFERENCE -> ContextCompat.getColor(context, typeValue.resourceId)
+			else -> typeValue.data
+		}
+
+		a.getValue(R.styleable.DropdownTextView_title_text_color_expanded, typeValue)
+		titleTextColorExpanded = when (typeValue.type) {
 			TypedValue.TYPE_REFERENCE -> ContextCompat.getColor(context, typeValue.resourceId)
 			else -> typeValue.data
 		}
@@ -161,14 +169,14 @@ class DropdownTextView : LinearLayout {
 		titleFontRes = a.getResourceId(R.styleable.DropdownTextView_title_font, -1)
 
 		a.getValue(R.styleable.DropdownTextView_content_text, typeValue)
-		contentText = when(typeValue.type){
+		contentText = when (typeValue.type) {
 			TypedValue.TYPE_STRING -> typeValue.string as String?
 			TypedValue.TYPE_REFERENCE -> resources.getString(typeValue.resourceId)
 			else -> null
 		}
 
 		a.getValue(R.styleable.DropdownTextView_content_text_color, typeValue)
-		contentTextColor = when(typeValue.type){
+		contentTextColor = when (typeValue.type) {
 			TypedValue.TYPE_REFERENCE -> ContextCompat.getColor(context, typeValue.resourceId)
 			else -> typeValue.data
 		}
@@ -273,6 +281,7 @@ class DropdownTextView : LinearLayout {
 		setHeightToContentHeight(animate)
 		setArrowViewState(true, animate)
 		setBackgroundState(true)
+		setTitleTextState(true)
 		isExpanded = true
 	}
 
@@ -280,6 +289,7 @@ class DropdownTextView : LinearLayout {
 		setHeightToZero(animate)
 		setArrowViewState(false, animate)
 		setBackgroundState(false)
+		setTitleTextState(false)
 		isExpanded = false
 	}
 
@@ -291,10 +301,18 @@ class DropdownTextView : LinearLayout {
 		}
 	}
 
+	private fun setTitleTextState(expand: Boolean) {
+		if (expand) {
+			(titleTextColorExpanded ?: titleTextColor)?.let { titleTextView.setTextColor(it) }
+		} else {
+			titleTextColor?.let { titleTextView.setTextColor(it) }
+		}
+	}
+
 	private fun setArrowViewState(expand: Boolean, animate: Boolean) {
 		val angle = if (resources.configuration.layoutDirection == View.LAYOUT_DIRECTION_RTL) {
 			if (expand) 90.0f else 180.0f
-		}else{
+		} else {
 			if (expand) 90.0f else 0.0f
 		}
 
@@ -337,8 +355,8 @@ class DropdownTextView : LinearLayout {
 	}
 
 	private fun measureContentTextView() {
-		val widthMS = View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.AT_MOST)
-		val heightMS = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+		val widthMS = MeasureSpec.makeMeasureSpec(width, MeasureSpec.AT_MOST)
+		val heightMS = MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED)
 		contentTextView.measure(widthMS, heightMS)
 	}
 
@@ -349,6 +367,8 @@ class DropdownTextView : LinearLayout {
 		var titleTextRes: Int = -1
 			private set
 		var titleTextColorRes: Int = -1
+			private set
+		var titleTextColorExpandedRes: Int = -1
 			private set
 		var titleTextSizeRes: Int = -1
 			private set
@@ -385,6 +405,11 @@ class DropdownTextView : LinearLayout {
 
 		fun setTitleTextColorRes(@ColorRes colorRes: Int): Builder {
 			this.titleTextColorRes = colorRes
+			return this
+		}
+
+		fun setTitleTextColorExpandedRes(@ColorRes colorRes: Int): Builder {
+			this.titleTextColorExpandedRes = colorRes
 			return this
 		}
 

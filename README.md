@@ -26,6 +26,7 @@ Adds drop-down to your layout via XML
         app:title_font="@font/your-title-font"
         app:title_text="@string/your-title-text"
         app:title_text_color="@color/your-title-text-color"
+        app:title_text_color_expanded="@color/your-title-text-color-expanded"
         app:title_text_size="@dimen/your-title-text-size"
         app:content_font="@font/your-font"
         app:content_padding="@dimen/your-content-padding"
@@ -47,6 +48,7 @@ Adds drop-down to your layout pragmatically
 val dropdown = DropdownTextView.Builder(this)
   .setTitleTextRes(R.string.your_title_text)
   .setTitleTextColorRes(R.color.your_title_text_color)
+  .setTitleTextColorExpandedRes(R.color.your_title_text_color_expanded)
   .setTitleTextSizeRes(R.dimen.your_title_text_size)
   .setTitleFontRes(R.font.your_title_font)
   .setContentTextRes(R.string.your_content_text)
@@ -67,7 +69,7 @@ val dropdown = DropdownTextView.Builder(this)
 ## Download
 Gradle:
 ```groovy
-compile 'com.github.hakobast:dropdown-textview:0.2'
+compile 'com.github.hakobast:dropdown-textview:0.2.1'
 ```
 Maven:
 ```xml

@@ -1,6 +1,6 @@
 package hakobastvatsatryan.sample
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.LinearLayout
@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
 
 		val thirdDropdownTextViewSecond = DropdownTextView.Builder(this)
 				.setTitleTextColorRes(R.color.third_drop_down_text_view_title)
+				.setTitleTextColorExpandedRes(R.color.third_drop_down_text_view_title_expanded)
 				.setTitleTextRes(R.string.dropdown_title_text)
 				.setContentTextColorRes(R.color.third_drop_down_text_view_content)
 				.setContentTextRes(R.string.dropdown_content_text)

@@ -11,5 +11,6 @@
     <color name="second_drop_down_text_view_content">#FF212C34</color>
 
     <color name="third_drop_down_text_view_title">#34495e</color>
+    <color name="third_drop_down_text_view_title_expanded">#077057</color>
     <color name="third_drop_down_text_view_content">#2c3e50</color>
 </resources>
