@@ -33,6 +33,8 @@ Adds drop-down to your layout via XML
         app:content_text="@string/your-content-text"
         app:content_text_color="@color/your-content-text-color"
         app:content_text_size="@color/your-content-text-size"
+        app:link_text_color="@color/your-text-link-color"
+        app:underline_link="isUnderlineVisible"
         app:arrow_drawable="@drawable/your-arrow-icon" comment="icon should be faced to the right"
         app:bg_drawable_regular="@drawable/your-regular-background"
         app:bg_drawable_expanded="@drawable/your-expanded-background"
@@ -56,6 +58,10 @@ val dropdown = DropdownTextView.Builder(this)
   .setContentTextSizeRes(R.color.your_content_text_size)
   .setContentFontRes(R.color.your_content_text_font)
   .setContentPaddingRes(R.dimen.your_content_padding)
+  .setHtmlContent(htmlText)
+  .setHtmlContent(htmlText, handler)
+  .setLinkTextColorRes(R.color.your_text_link_color)
+  .setLinkUnderline(isUnderlineVisible)
   .setArrowDrawableRes(R.drawable.your_drawable_icon) // icon should be faced to the right
   .setRegularBackgroundDrawableRes(R.drawable.your_regular_background)
   .setExpandedBackgroundDrawableRes(R.drawable.your_expanded_background)
@@ -69,14 +75,14 @@ val dropdown = DropdownTextView.Builder(this)
 ## Download
 Gradle:
 ```groovy
-compile 'com.github.hakobast:dropdown-textview:0.2.1'
+compile 'com.github.hakobast:dropdown-textview:0.3.0'
 ```
 Maven:
 ```xml
 <dependency>
   <groupId>com.github.hakobast</groupId>
   <artifactId>dropdown-textview</artifactId>
-  <version>0.2.1</version>
+  <version>0.3.0</version>
   <type>pom</type>
 </dependency>
 ```

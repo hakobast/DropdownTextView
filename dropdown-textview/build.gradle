@@ -14,7 +14,7 @@ ext {
     siteUrl = 'https://github.com/hakobast/DropdownTextView'
     gitUrl = 'https://github.com/hakobast/DropdownTextView.git'
 
-    libraryVersion = '0.2.1'
+    libraryVersion = '0.3.0'
 
     developerId = 'hakobast'
     developerName = 'Hakob Astvatsatryan'
@@ -26,11 +26,11 @@ ext {
 }
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
 
     defaultConfig {
         minSdkVersion 19
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
 
@@ -51,11 +51,11 @@ dependencies {
 
     /* Test */
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     /* AndroidX */
-    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
 
     /* Kotlin */
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"

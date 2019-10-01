@@ -10,6 +10,12 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.os.Bundle
 import android.os.Parcelable
+import android.text.Html
+import android.text.SpannableStringBuilder
+import android.text.TextPaint
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
+import android.text.style.URLSpan
 import androidx.annotation.*
 import hakobastvatsatryan.dropdowntextview.R
 
@@ -36,6 +42,11 @@ class DropdownTextView : LinearLayout {
 	private var contentTextColor: Int? = null
 	private var contentTextSizeRes: Int = -1
 	private var contentFontRes: Int = -1
+	private var rawHtmlContent: String? = null
+	private var spannableHtmlContent: String? = null
+	private var linkHandler: ((url: String) -> Unit)? = null
+	private var linkTextColor: Int? = null
+	private var isLinkUnderline: Boolean = true
 	private var arrowDrawableRes: Int = -1
 	private var bgRegularDrawableRes: Int = -1
 	private var bgExpandedDrawableRes: Int = -1
@@ -97,6 +108,57 @@ class DropdownTextView : LinearLayout {
 		contentTextView.setText(stringRes)
 	}
 
+	fun setHtmlContent(text: String) {
+		contentTextView.setText(Html.fromHtml(text), TextView.BufferType.SPANNABLE)
+		contentTextView.movementMethod = LinkMovementMethod.getInstance()
+	}
+
+	fun setHtmlContent(text: String, clickHandler: (url: String) -> Unit) {
+		val html = Html.fromHtml(text)
+		val spannableBuilder = SpannableStringBuilder(html)
+		val urlSPans = spannableBuilder.getSpans(0, html.length, URLSpan::class.java)
+		urlSPans.forEach {
+			makeClickable(spannableBuilder, it, isLinkUnderline) { url ->
+				clickHandler(url)
+			}
+		}
+
+		contentTextView.text = spannableBuilder
+		contentTextView.movementMethod = LinkMovementMethod.getInstance()
+	}
+
+	private fun makeClickable(spannableBuilder: SpannableStringBuilder,
+							  span: URLSpan,
+							  makeUnderline: Boolean,
+							  clickHandler: (url: String) -> Unit
+	) {
+		val clickableSpan = object : ClickableSpan() {
+			override fun onClick(widget: View) {
+				clickHandler(span.url)
+			}
+
+			override fun updateDrawState(ds: TextPaint) {
+				super.updateDrawState(ds)
+				ds.isUnderlineText = makeUnderline
+			}
+		}
+		spannableBuilder.setSpan(
+				clickableSpan,
+				spannableBuilder.getSpanStart(span),
+				spannableBuilder.getSpanEnd(span),
+				spannableBuilder.getSpanFlags(span)
+		)
+		spannableBuilder.removeSpan(span)
+	}
+
+	fun getTitleTextView(): TextView {
+		return titleTextView
+	}
+
+	fun getContentTextView(): TextView {
+		return contentTextView
+	}
+
 	override fun onSaveInstanceState(): Parcelable? {
 		val bundle = Bundle()
 		bundle.putParcelable("superState", super.onSaveInstanceState())
@@ -121,10 +183,17 @@ class DropdownTextView : LinearLayout {
 		titleTextSizeRes = builder.titleTextSizeRes
 		titleFontRes = builder.titleFontRes
 
-		contentText = resources.getString(builder.contentTextRes)
+		contentText = if (builder.contentTextRes > 0) resources.getString(builder.contentTextRes) else null
 		contentTextColor = ContextCompat.getColor(context, builder.contentTextColorRes)
 		contentTextSizeRes = builder.contentTextSizeRes
+
 		contentFontRes = builder.contentFontRes
+		rawHtmlContent = builder.rawHtmlContent
+		spannableHtmlContent = builder.spannableHtmlContent
+		linkHandler = builder.linkHandler
+
+		linkTextColor = if(builder.linkTextColorRes > 0) ContextCompat.getColor(context, builder.linkTextColorRes) else null
+		isLinkUnderline = builder.isLinkUnderline
 
 		bgRegularDrawableRes = builder.bgRegularDrawableRes
 		bgExpandedDrawableRes = builder.bgExpandedDrawableRes
@@ -179,6 +248,18 @@ class DropdownTextView : LinearLayout {
 		contentTextColor = when (typeValue.type) {
 			TypedValue.TYPE_REFERENCE -> ContextCompat.getColor(context, typeValue.resourceId)
 			else -> typeValue.data
+		}
+
+		a.getValue(R.styleable.DropdownTextView_link_text_color, typeValue)
+		linkTextColor = when (typeValue.type) {
+			TypedValue.TYPE_REFERENCE -> ContextCompat.getColor(context, typeValue.resourceId)
+			else -> typeValue.data
+		}
+
+		a.getValue(R.styleable.DropdownTextView_underline_link, typeValue)
+		isLinkUnderline = when (typeValue.type) {
+			TypedValue.TYPE_INT_BOOLEAN -> typeValue.data == 1
+			else -> true
 		}
 
 		contentTextSizeRes = a.getResourceId(R.styleable.DropdownTextView_content_text_size, -1)
@@ -265,12 +346,26 @@ class DropdownTextView : LinearLayout {
 			contentTextView.typeface = ResourcesCompat.getFont(context, contentFontRes)
 		}
 
+		rawHtmlContent?.let {
+			setHtmlContent(it)
+		}
+
+		spannableHtmlContent?.let {
+			setHtmlContent(it, linkHandler!!)
+		}
+
+		linkTextColor?.let {
+			contentTextView.setLinkTextColor(it)
+		}
+
 		context.resources.getDimension(panelPaddingRes).toInt().apply {
 			panelView.setPadding(this, this, this, this)
 		}
 		context.resources.getDimension(contentPaddingRes).toInt().apply {
 			contentTextView.setPadding(this, this, this, this)
 		}
+
+
 	}
 
 	private fun inflateView() {
@@ -378,7 +473,17 @@ class DropdownTextView : LinearLayout {
 			private set
 		var contentTextColorRes: Int = -1
 			private set
+		var linkTextColorRes: Int = -1
+			private set
+		var isLinkUnderline: Boolean = true
+			private set
+		var linkHandler: ((url: String) -> Unit)? = null
+			private set
 		var contentTextSizeRes: Int = -1
+			private set
+		var rawHtmlContent: String? = null
+			private set
+		var spannableHtmlContent: String? = null
 			private set
 		var contentFontRes: Int = -1
 			private set
@@ -433,8 +538,29 @@ class DropdownTextView : LinearLayout {
 			return this
 		}
 
+		fun setLinkTextColorRes(@ColorRes colorRes: Int): Builder {
+			this.linkTextColorRes = colorRes
+			return this
+		}
+
+		fun setLinkUnderline(value: Boolean): Builder {
+			this.isLinkUnderline = value
+			return this
+		}
+
 		fun setContentTextSizeRes(@DimenRes sizeRes: Int): Builder {
 			this.contentTextSizeRes = sizeRes
+			return this
+		}
+
+		fun setHtmlContent(text: String): Builder {
+			this.rawHtmlContent = text
+			return this
+		}
+
+		fun setHtmlContent(text: String, linkHandler: (url: String) -> Unit): Builder {
+			this.spannableHtmlContent = text
+			this.linkHandler = linkHandler
 			return this
 		}
 

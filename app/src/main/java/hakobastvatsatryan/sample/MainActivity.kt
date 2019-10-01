@@ -2,6 +2,7 @@ package hakobastvatsatryan.sample
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import hakobastvatsatryan.DropdownTextView
@@ -9,6 +10,9 @@ import hakobastvatsatryan.DropdownTextView
 typealias lp = LinearLayout.LayoutParams
 
 class MainActivity : AppCompatActivity() {
+
+	private val text = "Click to visit <a href=\"en/page\"> Page </a>"
+
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -23,7 +27,11 @@ class MainActivity : AppCompatActivity() {
 				.setTitleTextColorExpandedRes(R.color.third_drop_down_text_view_title_expanded)
 				.setTitleTextRes(R.string.dropdown_title_text)
 				.setContentTextColorRes(R.color.third_drop_down_text_view_content)
-				.setContentTextRes(R.string.dropdown_content_text)
+				.setLinkUnderline(false)
+				.setLinkTextColorRes(R.color.first_drop_down_text_view_title)
+				.setHtmlContent(text){ url ->
+					Log.d("LINK", "LINK $url")
+				}
 				.setRegularBackgroundDrawableRes(R.drawable.bg_third_dropdown_text_view_regular)
 				.setExpandedBackgroundDrawableRes(R.drawable.bg_third_dropdown_text_view_expanded)
 				.build()
