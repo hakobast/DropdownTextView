@@ -17,10 +17,6 @@ jobs:
 
 workflows:
   version: 2
-  test-n-deploy:
+  deploy:
     jobs:
       - deploy:
-          filters:
-            branches:
-              only:
-                - master
