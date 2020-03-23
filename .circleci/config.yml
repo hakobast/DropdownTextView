@@ -4,10 +4,7 @@ orbs:
   android: circleci/android@0.2.0
 
 jobs:
-  deploy:
-    branches:
-      only:
-        - master
+  build:
     steps:
       - checkout
       - run:
@@ -16,3 +13,6 @@ jobs:
       - run:
           name: Deploy to Bintray
           command: ./gradlew bintrayUpload
+    branches:
+      only:
+        - master
