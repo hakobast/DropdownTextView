@@ -14,3 +14,6 @@ jobs:
       - run:
           name: Deploy to Bintray
           command: ./gradlew bintrayUpload
+    branches:
+      only:
+        - master
