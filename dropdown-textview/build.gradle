@@ -1,28 +1,37 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.bintray'
 
-ext {
-    bintrayRepo = 'maven'
-    bintrayName = 'dropdown-textview'
+publishing {
+    publications {
+        MyPublication(MavenPublication) {
+            groupId 'com.github.hakobast'
+            artifactId 'dropdown-textview'
+            version "0.3.1"
+        }
+    }
+}
 
-    publishedGroupId = 'com.github.hakobast'
-    libraryName = 'DropdownTextView'
-    artifact = 'dropdown-textview'
+bintray {
+    user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
+    key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
 
-    libraryDescription = 'Simple drop-down TextView for Android'
-
-    siteUrl = 'https://github.com/hakobast/DropdownTextView'
-    gitUrl = 'https://github.com/hakobast/DropdownTextView.git'
-
-    libraryVersion = '0.3.1'
-
-    developerId = 'hakobast'
-    developerName = 'Hakob Astvatsatryan'
-    developerEmail = 'hakob.astvacatryan@gmail.com'
-
-    licenseName = 'The Apache Software License, Version 2.0'
-    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-    allLicenses = ["Apache-2.0"]
+    pkg {
+        repo = 'maven'
+        name = 'dropdown-textview'
+        licenses = ['Apache-2.0']
+        githubRepo = 'https://github.com/hakobast/DropdownTextView'
+        vcsUrl = 'https://github.com/hakobast/DropdownTextView.git'
+        publications = ['MyPublication']
+        publish = true
+        version {
+            name = version
+            desc = "Test"
+            released = new Date()
+            vcsTag = "0.3.1"
+        }
+    }
 }
 
 android {
@@ -59,11 +68,6 @@ dependencies {
 
     /* Kotlin */
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-}
-
-if (project.rootProject.file('local.properties').exists()) {
-    apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
-    apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
 }
 
 tasks.withType(Javadoc).all {
