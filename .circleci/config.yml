@@ -5,6 +5,9 @@ orbs:
 
 jobs:
   deploy:
+    branches:
+      only:
+        - master
     steps:
       - checkout
       - run:
@@ -13,10 +16,3 @@ jobs:
       - run:
           name: Deploy to Bintray
           command: ./gradlew bintrayUpload
-
-
-workflows:
-  version: 2
-  deploy:
-    jobs:
-      - deploy:
