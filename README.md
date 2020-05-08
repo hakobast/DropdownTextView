@@ -75,14 +75,14 @@ val dropdown = DropdownTextView.Builder(this)
 ## Download
 Gradle:
 ```groovy
-compile 'com.github.hakobast:dropdown-textview:0.3.2'
+compile 'com.github.hakobast:dropdown-textview:0.3.1'
 ```
 Maven:
 ```xml
 <dependency>
   <groupId>com.github.hakobast</groupId>
   <artifactId>dropdown-textview</artifactId>
-  <version>0.3.2</version>
+  <version>0.3.1</version>
   <type>pom</type>
 </dependency>
 ```
