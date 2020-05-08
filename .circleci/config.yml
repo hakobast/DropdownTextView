@@ -1,0 +1,27 @@
+version: 2.1
+
+orbs:
+  android: circleci/android@0.2.0
+
+jobs:
+  build:
+    executor: android/android
+    steps:
+      - checkout
+      - run:
+          name: Build release package
+          command: ./gradlew assembleRelease
+      - run:
+          name: Deploy to Bintray
+          command: ./gradlew bintrayUpload
+
+workflows:
+  version: 2
+  deploy:
+    jobs:
+      - build:
+        filters:
+          tags:
+            only: /^v.*/
+          branches:
+            only: master
